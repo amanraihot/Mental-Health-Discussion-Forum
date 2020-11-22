@@ -1,0 +1,34 @@
+{% extends "clone/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ u1.profile.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ u1.username }}</h2>
+          <p class="text-secondary">{{ u1.email }}</p>
+        </div>
+      </div>
+    </div>
+    <h6>Followers</h6>
+    {% if followers %}
+        {% for follow in followers %}
+          <ul class="list-group">
+            <li class="list-group-item"><h7><a class="article-title" href="{% url 'view_profile' follow.id %}">{{follow.username}}</a></h7></li>
+        </ul>
+        {%  endfor %}
+    {% else %}
+        <small>Not following anyone</small>
+    {% endif %}
+    </br>
+    <h6>Following</h6>
+    {% if followings %}
+        {% for following in followings %}
+          <ul class="list-group">
+            <li class="list-group-item"><h7><a class="article-title" href="{% url 'view_profile' following.id %}">{{following.username}}</a></h7></li>
+        </ul>
+        {%  endfor %}
+    {% else %}
+        <h7>Not followed by anyone</h7>
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends "clone/base.html" %}
+{% block content %}
+    <legend>{{name}}</legend>
+    {% if questions %}
+    {% for que in questions %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+               Added By- <h7>{{que.author.username}}</a></h7>
+            </div>
+              <h2><a class="article-title" href="{% url 'answer-detail' que.id %}">{{que.question}}</a></h2>
+              {% if que.author == user %}
+          <div>
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'question-delete' que.id %}">Delete</a>
+          </div>
+        {% endif %}
+              {% if que.num_answers == 0 %}
+                Be the first to answer <a class="btn btn-success" href="{% url 'add-answer' que.pk %}"> Add Answer </a>
+              {% else %}
+                {{que.num_answers}}-Answers.
+              You also want to answer<a class="btn btn-success" href="{% url 'add-answer' que.pk %}"> Add Answer </a>
+              {% endif %}
+          </div>
+        </article>
+    {% endfor %}
+    {% else %}
+    Sorry Mate No Questions Yet
+    Why don't you Ask
+    {% endif %}
+{% endblock %}

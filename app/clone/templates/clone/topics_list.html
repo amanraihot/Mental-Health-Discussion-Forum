@@ -1,0 +1,14 @@
+{% extends "clone/base.html" %}
+{% block content %}
+    <legend>Choose topic of your question</legend>
+    {% for topic in topics %}
+       <div class="list-group">
+          <li class="list-group-item"> <a href="{% url 'topics_questions' topic.pk %}">{{topic.name}}</a>
+            <a class="btn btn-success" href="{% url 'add-question' topic.pk %}"> Ask Question </a>
+              <a class="btn btn-primary" href="{% url 'topics_answers' topic.pk %}"> Browse feed </a>
+            </li>
+        </div>
+    {% endfor %}
+    Your Topic is not present no worries create your topic and then ask
+     <a class="btn btn-outline-warning" href="{% url 'create_topic'  %}"> Create Topic </a>
+{% endblock %}  

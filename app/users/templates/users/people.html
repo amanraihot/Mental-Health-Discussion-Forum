@@ -1,0 +1,6 @@
+{% for user in users %}
+    {{user.username}}
+    <a href="{% url 'change_friends' operation='add' pk=user.pk %}">
+            <button type="button" class="btn btn-success">Add Friend</button>
+            </a>
+{% endfor %}

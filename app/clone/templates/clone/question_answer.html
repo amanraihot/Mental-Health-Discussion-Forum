@@ -1,0 +1,21 @@
+{% extends "clone/base.html" %}
+{% block content %}
+    <h1>{{question.question}}</h1>
+    {% if answers %}
+    {% for answer in answers %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+               Answered By- <h7>{{answer.answered_by.username}}</a></h7>
+            </div>
+              <p><a class="article-title" href="{% url 'answer-detail' answer.id %}">{{answer.answer}}</a></p>
+             <a class="btn btn-primary" href="{% url 'upvote' answer.id %}">{{answer.upvotes}} </a>
+          </div>
+        </article>
+    {% endfor %}
+    {% else %}
+    <legend>No answers yet</legend>
+     <a class="btn btn-success" href="{% url 'add-answer' question.pk %}"> Add Answer </a>
+   {% endif %}
+
+{% endblock %}

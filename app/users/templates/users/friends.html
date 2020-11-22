@@ -1,0 +1,28 @@
+{% extends "clone/base.html" %}
+{% block content %}
+    <h6>Followers</h6>
+    {% if followers %}
+        {% for follow in followers %}
+          <ul class="list-group">
+            <li class="list-group-item"><h7><a class="article-title" href="{% url 'view_profile' follow.id %}">{{follow.username}}</a></h7></li>
+        </ul>
+        {%  endfor %}
+    {% else %}
+        <small>Not following anyone</small>
+    {% endif %}
+    </br>
+    <h6>Following</h6>
+    {% if followings %}
+        {% for following in followings %}
+          <ul class="list-group">
+            <li class="list-group-item"><h7><a class="article-title" href="{% url 'view_profile' following.id %}">{{following.username}}</a></h7>
+            <a href="{% url 'remove_friends' following.id %}">
+            <button type="button" class="btn btn-success">Unfollow</button>
+            </a>
+            </li>
+        </ul>
+        {%  endfor %}
+    {% else %}
+        <h7>Not followed by anyone</h7>
+    {% endif %}
+{% endblock %}

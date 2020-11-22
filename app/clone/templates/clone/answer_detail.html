@@ -1,0 +1,36 @@
+{% extends "clone/base.html" %}
+{% block content %}
+<article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="{% url 'view_profile' id %}">{{ object.answered_by }}</a>
+        {% if object.answered_by != user %}
+          {% if object.answered_by not in following_list %}
+          <div>
+            <a class="btn btn-secondary btn-sm mt-2 mb-2" href="{% url 'follow-answer' object.answered_by.id %}">Follow</a>
+          </div>
+          {% else %}
+             <a class="btn btn-success btn-sm mt-2 mb-2" href="#">Following</a>
+          {% endif %}
+        {% endif %}
+        <small class="text-muted">{{ object.time_created|date:"F d, Y" }}</small>
+          <small class="text-muted">{{ object.answer}}</small>
+        {% if object.answered_by == user %}
+          <div>
+            <a class="btn btn-secondary btn-sm mt-1 mb-2" href="{% url 'update-answer' object.id %}">Update</a>
+            <a class="btn btn-danger btn-sm mt-1 mb-2" href="{% url 'answer-delete' object.id %}">Delete</a>
+          </div>
+        {% endif %}
+      </div>
+      <h2 class="article-title">{{ object.question_url.question}}</h2>
+       <p class="article-content">{{answer.answer}}</p>
+    </div>
+  </article>
+  <h2>Comments</h2>
+    {% for comment in comments %}
+      <ul class="list-group">
+     <li class="list-group-item">{{comment.comments}}</li>
+    </ul>
+    {%  endfor %}
+      <a class="btn btn-primary" href="{% url 'comment' object.id %}">Add Comment</a>
+{% endblock content %}

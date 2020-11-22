@@ -1,0 +1,16 @@
+{% extends "clone/base.html" %}
+{% block content %}
+    {% for answer in answers %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ answer.answered_by.profile.image.url }}">
+          <div class="media-body">
+            <div class="article-metadata">
+               Answered By- <h7>{{answer.answered_by.username}}</a></h7>
+              </div>
+              <h2><a class="article-title" href="{% url 'answer-detail' answer.id %}">{{answer.question_url.question}}</a></h2>
+            <p class="article-content">{{answer.answer}}</p>
+             <a class="btn btn-primary" href="{% url 'upvote' answer.pk %}">{{answer.upvotes}} </a>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock %}
